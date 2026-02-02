@@ -7,7 +7,8 @@ public record ProductResponse(
         String name,
         String description,
         Double price,
-        Integer stock
+        Integer stock,
+        String status
 ) {
     public static ProductResponse fromEntity(Product product) {
         return new ProductResponse(
@@ -15,7 +16,8 @@ public record ProductResponse(
                 product.getName(),
                 product.getDescription(),
                 product.getPrice().doubleValue(),
-                product.getStock()
+                product.getStock(),
+                product.getStatus().name()
         );
     }
 }

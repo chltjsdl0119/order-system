@@ -32,6 +32,10 @@ public class OrderServiceImpl implements OrderService {
         Product product = productRepository.findById(command.productId())
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 상품입니다. id: " + command.productId()));
 
+        if (product.isInactive()) {
+            throw new IllegalStateException("판매 중단된 상품입니다.");
+        }
+
         product.decreaseStock(command.quantity());
 
         Order order = Order.create(user, product, command.quantity());

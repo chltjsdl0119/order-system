@@ -1,6 +1,7 @@
 package com.example.ordersystem.product.application.dto.command;
 
 import com.example.ordersystem.product.domain.Product;
+import com.example.ordersystem.product.domain.ProductStatus;
 
 import java.math.BigDecimal;
 
@@ -16,6 +17,7 @@ public record CreateProductCommand(
             .description(description)
             .price(BigDecimal.valueOf(price))
             .stock(stock)
+            .status(ProductStatus.ACTIVE)
             .build();
     }
 }

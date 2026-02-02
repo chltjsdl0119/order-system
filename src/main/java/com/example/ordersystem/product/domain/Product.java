@@ -3,6 +3,8 @@ package com.example.ordersystem.product.domain;
 import com.example.ordersystem.global.domain.BaseTimeEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -36,6 +38,10 @@ public class Product extends BaseTimeEntity {
 
     private Integer stock;
 
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private ProductStatus status;
+
     public void updateDetails(String name, String description, Double price, Integer stock) {
         this.name = name;
         this.description = description;
@@ -53,5 +59,16 @@ public class Product extends BaseTimeEntity {
         }
 
         this.stock -= quantity;
+    }
+
+    public void deactivate() {
+        if (this.status == ProductStatus.INACTIVE) {
+            throw new IllegalStateException("이미 판매 중단된 상품입니다.");
+        }
+        this.status = ProductStatus.INACTIVE;
+    }
+
+    public boolean isInactive() {
+        return this.status == ProductStatus.INACTIVE;
     }
 }

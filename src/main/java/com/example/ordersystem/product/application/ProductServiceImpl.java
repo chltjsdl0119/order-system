@@ -47,4 +47,12 @@ public class ProductServiceImpl implements ProductService {
         return productRepository.findAll(pageable)
                 .map(ProductResponse::fromEntity);
     }
+
+    @Transactional
+    public void deleteProduct(Long productId) {
+        Product product = productRepository.findById(productId)
+                .orElseThrow(() -> new IllegalArgumentException("상품 없음"));
+
+        product.deactivate();
+    }
 }
