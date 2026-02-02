@@ -58,7 +58,7 @@ public class Order {
                 .customer(customer)
                 .product(product)
                 .quantity(quantity)
-                .priceAtOrderTime(product.getPrice())
+                .priceAtOrderTime(product.getPrice().multiply(BigDecimal.valueOf(quantity)))
                 .status(OrderStatus.CREATED)
                 .build();
     }
