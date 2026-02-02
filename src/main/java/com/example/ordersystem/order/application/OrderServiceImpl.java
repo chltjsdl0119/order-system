@@ -41,7 +41,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public OrderResponse getOrderDetails(Long orderId) {
-        Order order = orderRepository.findById(orderId)
+        Order order = orderRepository.findByIdWithCustomerAndProduct(orderId)
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 주문입니다. id: " + orderId));
 
         return OrderResponse.from(order);

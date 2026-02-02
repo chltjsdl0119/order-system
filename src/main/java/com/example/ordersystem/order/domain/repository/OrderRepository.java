@@ -10,7 +10,7 @@ public interface OrderRepository {
 
     Order save(Order order);
 
-    Optional<Order> findById(Long id);
+    Optional<Order> findByIdWithCustomerAndProduct(Long id);
 
     Page<Order> findOrdersWithProductByCustomerId(Long customerId, Pageable pageable);
 }
