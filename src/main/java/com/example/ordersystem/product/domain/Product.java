@@ -35,4 +35,11 @@ public class Product extends BaseTimeEntity {
     private BigDecimal price;
 
     private Integer stock;
+
+    public void updateDetails(String name, String description, Double price, Integer stock) {
+        this.name = name;
+        this.description = description;
+        this.price = BigDecimal.valueOf(price);
+        this.stock = stock;
+    }
 }
